@@ -1,0 +1,1518 @@
+<!DOCTYPE html>
+<html lang="my">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>စာကြည့်တိုက်ပညာဌာန | မြန်မာပညာရပ် & DDC ရည်ညွှန်း</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Pyidaungsu:wght@400;700&display=swap');
+        
+        :root {
+            --primary: #0a3d62;       /* ပညာရပ်ဆိုင်ရာ အပြာရင့် */
+            --secondary: #3c6382;     /* အပြာဖျော့ */
+            --accent: #f39c12;        /* လိမ္မော်ရောင် */
+            --admin: #e84118;          /* အနီရင့် */
+            --library: #00a8ff;        /* တောက်ပသောအပြာ */
+            --bg: #f5f6fa;             /* မီးခိုးဖျော့ */
+            --white: #ffffff;
+            --shadow: rgba(10, 61, 98, 0.2);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Pyidaungsu', sans-serif;
+            background: linear-gradient(135deg, #0a3d62 0%, #3c6382 100%);
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+            background-size: 200% 200%;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            background: var(--white);
+            border-radius: 20px;
+            box-shadow: 0 20px 40px var(--shadow);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            animation: containerSlideIn 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        }
+
+        @keyframes containerSlideIn {
+            0% { opacity: 0; transform: translateY(50px) scale(0.9); }
+            100% { opacity: 1; transform: translateY(0) scale(1); }
+        }
+
+        .header {
+            background: linear-gradient(45deg, var(--primary), #1e3799);
+            color: white;
+            padding: 25px 30px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, var(--accent), transparent);
+            animation: shimmer 2s infinite;
+        }
+
+        .university-badge {
+            position: absolute;
+            top: 15px;
+            left: 20px;
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            color: white;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-family: 'Pyidaungsu', sans-serif;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .admin-btn {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            color: white;
+            padding: 8px 15px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-family: 'Pyidaungsu', sans-serif;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(5px);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .admin-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+        }
+
+        @keyframes shimmer {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+
+        .header h1 {
+            margin: 0;
+            font-size: 2.2rem;
+            animation: titleFadeIn 1s ease-out;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+
+        .header h2 {
+            margin: 10px 0 0 0;
+            font-size: 1.5rem;
+            color: var(--accent);
+        }
+
+        @keyframes titleFadeIn {
+            0% { opacity: 0; transform: translateY(-20px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+
+        .header small {
+            display: block;
+            margin-top: 10px;
+            opacity: 0.9;
+            animation: subtitleFadeIn 1s ease-out 0.3s both;
+        }
+
+        @keyframes subtitleFadeIn {
+            0% { opacity: 0; transform: translateY(10px); }
+            100% { opacity: 0.9; transform: translateY(0); }
+        }
+
+        .main-content {
+            display: flex;
+            min-height: 600px;
+        }
+
+        .sidebar {
+            width: 300px;
+            background: linear-gradient(180deg, #0a3d62 0%, #1e3799 100%);
+            color: white;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .sidebar-section {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            padding: 15px;
+            backdrop-filter: blur(10px);
+        }
+
+        .sidebar-section h3 {
+            color: var(--accent);
+            margin-bottom: 15px;
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .category-list {
+            list-style: none;
+        }
+
+        .category-item {
+            padding: 10px 15px;
+            margin-bottom: 8px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .category-item:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateX(5px);
+        }
+
+        .category-item i {
+            color: var(--accent);
+            width: 20px;
+        }
+
+        .chat-container {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .chat-box {
+            flex: 1;
+            overflow-y: auto;
+            padding: 25px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            background: linear-gradient(180deg, #f5f6fa 0%, #dcdde1 100%);
+        }
+
+        .chat-box::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .chat-box::-webkit-scrollbar-track {
+            background: rgba(0,0,0,0.05);
+            border-radius: 10px;
+        }
+
+        .chat-box::-webkit-scrollbar-thumb {
+            background: var(--primary);
+            border-radius: 10px;
+        }
+
+        .message {
+            max-width: 70%;
+            padding: 15px 20px;
+            border-radius: 18px;
+            font-size: 1rem;
+            line-height: 1.6;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: messageAppear 0.5s ease forwards;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        @keyframes messageAppear {
+            0% { opacity: 0; transform: translateY(20px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+
+        .bot {
+            background: linear-gradient(135deg, #e1f5fe 0%, #b3e5fc 100%);
+            align-self: flex-start;
+            border-bottom-left-radius: 4px;
+            border: 1px solid #81d4fa;
+        }
+
+        .user {
+            background: linear-gradient(135deg, var(--secondary), #1e3799);
+            color: white;
+            align-self: flex-end;
+            border-bottom-right-radius: 4px;
+        }
+
+        .input-area {
+            padding: 20px 25px;
+            border-top: 1px solid #dcdde1;
+            display: flex;
+            gap: 15px;
+            background: var(--white);
+            animation: inputSlideUp 0.5s ease-out 0.5s both;
+        }
+
+        @keyframes inputSlideUp {
+            0% { opacity: 0; transform: translateY(20px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+
+        input {
+            flex: 1;
+            padding: 15px 20px;
+            border: 2px solid #dcdde1;
+            border-radius: 30px;
+            outline: none;
+            font-family: 'Pyidaungsu', sans-serif;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            background: #f5f6fa;
+        }
+
+        input:focus {
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px rgba(243, 156, 18, 0.1);
+            background: var(--white);
+            transform: translateY(-2px);
+        }
+
+        button {
+            background: linear-gradient(45deg, var(--accent), #e67e22);
+            color: white;
+            border: none;
+            padding: 15px 25px;
+            border-radius: 30px;
+            cursor: pointer;
+            font-weight: bold;
+            font-family: 'Pyidaungsu', sans-serif;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(243, 156, 18, 0.3);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(243, 156, 18, 0.4);
+        }
+
+        .typing-indicator {
+            display: none;
+            align-self: flex-start;
+            background: #e1f5fe;
+            padding: 12px 18px;
+            border-radius: 18px;
+            margin-bottom: 10px;
+            border: 1px solid #81d4fa;
+        }
+
+        .typing-dots {
+            display: flex;
+            gap: 4px;
+        }
+
+        .typing-dots span {
+            width: 8px;
+            height: 8px;
+            background: var(--primary);
+            border-radius: 50%;
+            animation: typing 1.4s infinite ease-in-out;
+        }
+
+        .typing-dots span:nth-child(1) { animation-delay: -0.32s; }
+        .typing-dots span:nth-child(2) { animation-delay: -0.16s; }
+
+        @keyframes typing {
+            0%, 80%, 100% { transform: scale(0); opacity: 0.5; }
+            40% { transform: scale(1); opacity: 1; }
+        }
+
+        /* Admin Panel */
+        .admin-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.9);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            animation: fadeIn 0.3s ease;
+            padding: 20px;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .admin-panel {
+            background: white;
+            width: 95%;
+            max-width: 1400px;
+            height: 90vh;
+            border-radius: 20px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            animation: panelSlideIn 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        }
+
+        @keyframes panelSlideIn {
+            0% { opacity: 0; transform: translateY(50px) scale(0.9); }
+            100% { opacity: 1; transform: translateY(0) scale(1); }
+        }
+
+        .admin-header {
+            background: linear-gradient(45deg, var(--primary), #1e3799);
+            color: white;
+            padding: 20px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .admin-header h3 {
+            margin: 0;
+            font-size: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .admin-controls {
+            display: flex;
+            gap: 10px;
+        }
+
+        .admin-btn-small {
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            color: white;
+            padding: 8px 15px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-family: 'Pyidaungsu', sans-serif;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .admin-content {
+            flex: 1;
+            display: flex;
+            overflow: hidden;
+        }
+
+        .admin-sidebar {
+            width: 250px;
+            background: #f5f6fa;
+            border-right: 1px solid #dcdde1;
+            padding: 20px;
+        }
+
+        .admin-menu {
+            list-style: none;
+        }
+
+        .admin-menu li {
+            padding: 12px 15px;
+            margin-bottom: 8px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .admin-menu li.active {
+            background: var(--secondary);
+            color: white;
+        }
+
+        .admin-menu li:hover:not(.active) {
+            background: #dcdde1;
+        }
+
+        .admin-main {
+            flex: 1;
+            padding: 20px;
+            overflow-y: auto;
+            background: #f5f6fa;
+        }
+
+        .admin-section {
+            display: none;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .admin-section.active {
+            display: block;
+        }
+
+        .dashboard-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .dashboard-card {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            text-align: center;
+            border: 1px solid #dcdde1;
+        }
+
+        .card-number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+
+        .card-label {
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        .table-container {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            border: 1px solid #dcdde1;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th {
+            background: var(--primary);
+            color: white;
+            padding: 15px;
+            text-align: left;
+        }
+
+        td {
+            padding: 12px 15px;
+            border-bottom: 1px solid #dcdde1;
+        }
+
+        tr:hover {
+            background: #f5f6fa;
+        }
+
+        .action-btns {
+            display: flex;
+            gap: 5px;
+        }
+
+        .action-btn {
+            padding: 5px 10px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.8rem;
+            transition: all 0.3s ease;
+        }
+
+        .edit-btn {
+            background: #e3f2fd;
+            color: var(--secondary);
+        }
+
+        .delete-btn {
+            background: #ffebee;
+            color: var(--admin);
+        }
+
+        .view-btn {
+            background: #e8f5e9;
+            color: #2e7d32;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: var(--primary);
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #dcdde1;
+            border-radius: 8px;
+            font-family: 'Pyidaungsu', sans-serif;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .form-group textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            border-color: var(--accent);
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(243, 156, 18, 0.1);
+        }
+
+        .login-form {
+            background: white;
+            padding: 40px;
+            border-radius: 15px;
+            width: 90%;
+            max-width: 400px;
+            margin: auto;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            text-align: center;
+            border: 2px solid var(--accent);
+        }
+
+        .login-form h3 {
+            margin-bottom: 20px;
+            color: var(--primary);
+        }
+
+        .login-form input {
+            width: 100%;
+            margin-bottom: 15px;
+            padding: 12px 15px;
+        }
+
+        .login-btn {
+            background: linear-gradient(45deg, var(--primary), #1e3799);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-family: 'Pyidaungsu', sans-serif;
+            font-weight: bold;
+            width: 100%;
+            margin-top: 10px;
+        }
+
+        @media (max-width: 768px) {
+            .main-content {
+                flex-direction: column;
+            }
+            .sidebar {
+                width: 100%;
+                padding: 15px;
+            }
+            .header h1 {
+                font-size: 1.8rem;
+            }
+            .university-badge, .admin-btn {
+                position: relative;
+                top: 0;
+                left: 0;
+                right: 0;
+                margin: 5px;
+                justify-content: center;
+            }
+            .message {
+                max-width: 90%;
+            }
+        }
+
+        .quick-response {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .response-btn {
+            background: linear-gradient(45deg, var(--library), #0097e6);
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+
+        .response-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 168, 255, 0.3);
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="header">
+        <div class="university-badge">
+            <i class="fas fa-university"></i>
+            စာကြည့်တိုက်ပညာဌာန
+        </div>
+        
+        <h1>မြန်မာပညာရပ် & DDC ရည်ညွှန်းလက်ထောက်</h1>
+        <h2>Myanmar Studies & DDC Reference Assistant</h2>
+        <small>စာကြည့်တိုက်ပညာ၊ မြန်မာစာပေ၊ ရာဇဝင်နှင့် ဒီဝေး ဒဿမအမျိုးအစားခွဲခြားခြင်းဆိုင်ရာ အချက်အလက်များ</small>
+        
+        <button class="admin-btn" onclick="showLogin()">
+            <i class="fas fa-user-shield"></i>
+            စီမံခန့်ခွဲရန်
+        </button>
+    </div>
+
+    <div class="main-content">
+        <div class="sidebar">
+            <div class="sidebar-section">
+                <h3><i class="fas fa-search"></i> အမြန်ရှာဖွေရန်</h3>
+                <input type="text" id="searchInput" placeholder="ခေါင်းစဉ်/စာရေးဆရာ/DDC နံပါတ်..." 
+                       style="width:100%; margin-bottom:10px;">
+                <div class="quick-response">
+                    <button class="response-btn" onclick="quickQuestion('DDC ဆိုတာဘာလဲ')">DDC အခြေခံ</button>
+                    <button class="response-btn" onclick="quickQuestion('မြန်မာစာအုပ်စာရင်းပြုစုနည်း')">စာအုပ်စာရင်း</button>
+                    <button class="response-btn" onclick="quickQuestion('မြန်မာစာပေသမိုင်း')">မြန်မာစာပေ</button>
+                    <button class="response-btn" onclick="quickQuestion('DDC ပုဒ်မခွဲ 959.1')">မြန်မာ့ရာဇဝင်</button>
+                </div>
+            </div>
+     <!-- Sidebar ရဲ့ အောက်ဆုံးမှာ ထည့်ပါ -->
+<div class="sidebar-section" style="margin-top: auto;">
+    <h3><i class="fas fa-question-circle"></i> မေးခွန်းရှိပါသလား?</h3>
+    <p style="font-size: 0.9rem; color: #ddd; margin-bottom: 15px;">
+        စနစ်မှာ အဖြေမရှိသော မေးခွန်းများကို အောက်ပါခလုတ်မှတစ်ဆင့် တိုက်ရိုက်မေးမြန်းနိုင်ပါသည်။
+    </p>
+    <a href="https://docs.google.com/forms/d/e/1FAIpQLSdb6H2kvNbWu8plJel_NqOiISR-mXNBysex9tMCVUVp0OiWBg/viewform?usp=sharing&ouid=100861332529389289094">
+        <button style="width: 100%; background: linear-gradient(45deg, #25D366, #128C7E); color: white; border: none; padding: 12px; border-radius: 25px; font-family: 'Pyidaungsu', sans-serif; font-weight: bold; display: flex; align-items: center; justify-content: center; gap: 10px; cursor: pointer;">
+            <i class="fas fa-question-circle"></i> Google Form မှမေးမြန်းရန်
+        </button>
+    </a>
+    <p style="font-size: 0.8rem; color: #aaa; margin-top: 10px; text-align: center;">
+        *အဖြေကို သင့်အီးမေးလ်သို့ ပြန်လည်ပေးပို့ပါမည်။
+    </p>
+</div>       
+            <div class="sidebar-section">
+                <h3><i class="fas fa-book"></i> မြန်မာပညာရပ်</h3>
+                <ul class="category-list">
+                    <li class="category-item" onclick="quickQuestion('မြန်မာစာပေသမိုင်း')"><i class="fas fa-feather"></i> စာပေသမိုင်း</li>
+                    <li class="category-item" onclick="quickQuestion('ကိုလိုနီခေတ်စာပေ')"><i class="fas fa-clock"></i> ကိုလိုနီခေတ်</li>
+                    <li class="category-item" onclick="quickQuestion('ခေတ်ပေါ်စာရေးဆရာများ')"><i class="fas fa-user"></i> ခေတ်ပေါ်စာရေးဆရာ</li>
+                    <li class="category-item" onclick="quickQuestion('မြန်မာရာဇဝင်ကျမ်းများ')"><i class="fas fa-scroll"></i> ရာဇဝင်ကျမ်း</li>
+                    <li class="category-item" onclick="quickQuestion('မြန်မာ့ယဉ်ကျေးမှု')"><i class="fas fa-mask"></i> ယဉ်ကျေးမှု</li>
+                </ul>
+            </div>
+            
+            <div class="sidebar-section">
+                <h3><i class="fas fa-hashtag"></i> DDC ဒဿမအမျိုးအစား</h3>
+                <ul class="category-list">
+                    <li class="category-item" onclick="quickQuestion('DDC အခြေခံအနှစ်ချုပ်')"><i class="fas fa-calculator"></i> အခြေခံနိယာမ</li>
+                    <li class="category-item" onclick="quickQuestion('DDC ပုဒ်မခွဲ 800 စာပေ')"><i class="fas fa-book-open"></i> 800 စာပေ</li>
+                    <li class="category-item" onclick="quickQuestion('DDC ပုဒ်မခွဲ 900 ရာဇဝင်')"><i class="fas fa-globe-asia"></i> 900 ရာဇဝင်</li>
+                    <li class="category-item" onclick="quickQuestion('DDC ပုဒ်မခွဲ 959.1 မြန်မာ')"><i class="fas fa-map"></i> 959.1 မြန်မာ</li>
+                    <li class="category-item" onclick="quickQuestion('DDC ဇယားကွက် အသုံးပြုနည်း')"><i class="fas fa-table"></i> ဇယားကွက်များ</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="chat-container">
+            <div class="chat-box" id="chatBox">
+                <div class="message bot">
+                    <strong>မင်္ဂလာပါ!</strong><br>
+                    စာကြည့်တိုက်ပညာဌာနမှ ကြိုဆိုပါသည်။<br>
+                    မြန်မာပညာရပ်၊ DDC အမျိုးအစားခွဲခြားခြင်း၊ စာအုပ်စာရင်းပြုစုနည်း၊ စာကြည့်တိုက်ဝန်ဆောင်မှုများအကြောင်း မေးမြန်းနိုင်ပါသည်။<br>
+                    ဥပမာ - "DDC ဆိုတာဘာလဲ"၊ "မြန်မာစာပေသမိုင်း"၊ "ကိုးကားချက်ရေးနည်း"၊ "ပုဒ်မခွဲ 959.1"
+                </div>
+            </div>
+
+            <div class="typing-indicator" id="typingIndicator">
+                <div class="typing-dots">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+
+            <div class="input-area">
+                <input type="text" id="userInput" placeholder="မေးခွန်း သို့မဟုတ် ရှာဖွေလိုသော အကြောင်းအရာ..." 
+                       onkeypress="handleKeyPress(event)">
+                <button onclick="handleSearch()" id="searchBtn">
+                    <i class="fas fa-paper-plane"></i>
+                    မေးမြန်းရန်
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Admin Login -->
+<div class="admin-overlay" id="loginOverlay">
+    <div class="login-form">
+        <h3><i class="fas fa-user-shield"></i> အက်ဒမင်လော့ဂ်အင်း</h3>
+        <p style="color: #666; margin-bottom: 20px;">စာကြည့်တိုက်ပညာဌာန စီမံခန့်ခွဲရန်</p>
+        <input type="password" id="adminPassword" placeholder="လျှို့ဝှက်နံပါတ်">
+        <button class="login-btn" onclick="loginAdmin()">
+            <i class="fas fa-sign-in-alt"></i>
+            အကောင့်ဝင်မည်
+        </button>
+        <p id="loginError" style="color: #e74c3c; margin-top: 10px; display: none;">
+            <i class="fas fa-exclamation-circle"></i> လျှို့ဝှက်နံပါတ် မှားနေပါသည်
+        </p>
+    </div>
+</div>
+
+<!-- Admin Panel -->
+<div class="admin-overlay" id="adminOverlay">
+    <div class="admin-panel">
+        <div class="admin-header">
+            <h3><i class="fas fa-cogs"></i> စာကြည့်တိုက်ပညာဌာန စီမံခန့်ခွဲရေးစနစ်</h3>
+            <div class="admin-controls">
+                <button class="admin-btn-small" onclick="exportData()">
+                    <i class="fas fa-download"></i> ဒေတာထုတ်ယူမည်
+                </button>
+                <button class="admin-btn-small" onclick="closeAdmin()">
+                    <i class="fas fa-times"></i> ပိတ်မည်
+                </button>
+            </div>
+        </div>
+        
+        <div class="admin-content">
+            <div class="admin-sidebar">
+                <ul class="admin-menu">
+                    <li class="active" onclick="showAdminSection('dashboard')">
+                        <i class="fas fa-tachometer-alt"></i> ဒက်ရှ်ဘုတ်
+                    </li>
+                    <li onclick="showAdminSection('references')">
+                        <i class="fas fa-book"></i> ရည်ညွှန်းအချက်အလက်များ
+                    </li>
+                    <li onclick="showAdminSection('questions')">
+                        <i class="fas fa-question-circle"></i> မေးခွန်းများ
+                    </li>
+                    <li onclick="showAdminSection('users')">
+                        <i class="fas fa-users"></i> အသုံးပြုသူများ
+                    </li>
+                    <li onclick="showAdminSection('reports')">
+                        <i class="fas fa-chart-bar"></i> အစီရင်ခံစာများ
+                    </li>
+                    <li onclick="showAdminSection('settings')">
+                        <i class="fas fa-cog"></i> စနစ်ချိန်ညှိချက်များ
+                    </li>
+                </ul>
+            </div>
+            
+            <div class="admin-main">
+                <!-- Dashboard Section -->
+                <div id="dashboard" class="admin-section active">
+                    <h3><i class="fas fa-tachometer-alt"></i> ဒက်ရှ်ဘုတ်</h3>
+                    <div class="dashboard-cards">
+                        <div class="dashboard-card">
+                            <div class="card-number" id="totalReferences">0</div>
+                            <div class="card-label">စုစုပေါင်းရည်ညွှန်းချက်များ</div>
+                        </div>
+                        <div class="dashboard-card">
+                            <div class="card-number" id="totalQuestions">0</div>
+                            <div class="card-label">စုစုပေါင်းမေးခွန်းများ</div>
+                        </div>
+                        <div class="dashboard-card">
+                            <div class="card-number" id="answeredQuestions">0</div>
+                            <div class="card-label">အဖြေပေးပြီးမေးခွန်းများ</div>
+                        </div>
+                        <div class="dashboard-card">
+                            <div class="card-number" id="totalUsers">0</div>
+                            <div class="card-label">အသုံးပြုသူဦးရေ</div>
+                        </div>
+                    </div>
+                    
+                    <h4 style="margin: 30px 0 15px 0;">နောက်ဆုံးမေးခွန်းများ</h4>
+                    <div class="table-container">
+                        <table id="recentQuestions">
+                            <thead>
+                                <tr>
+                                    <th>အချိန်</th>
+                                    <th>မေးခွန်း</th>
+                                    <th>အခြေအနေ</th>
+                                    <th>လုပ်ဆောင်ချက်များ</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- Recent questions will be loaded here -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                
+                <!-- References Section -->
+                <div id="references" class="admin-section">
+                    <h3><i class="fas fa-book"></i> ရည်ညွှန်းအချက်အလက်များ စီမံခန့်ခွဲရန်</h3>
+                    <div style="text-align: right; margin-bottom: 20px;">
+                        <button onclick="showAddReferenceForm()" style="background: var(--accent);">
+                            <i class="fas fa-plus"></i> အသစ်ထည့်ရန်
+                        </button>
+                    </div>
+                    <div class="table-container">
+                        <table id="referencesTable">
+                            <thead>
+                                <tr>
+                                    <th>ခေါင်းစဥ်</th>
+                                    <th>အမျိုးအစား</th>
+                                    <th>အကြောင်းအရာ</th>
+                                    <th>လုပ်ဆောင်ချက်များ</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- References will be loaded here -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                
+                <!-- Questions Section -->
+                <div id="questions" class="admin-section">
+                    <h3><i class="fas fa-question-circle"></i> မေးခွန်းများ စီမံခန့်ခွဲရန်</h3>
+                    <div class="table-container">
+                        <table id="questionsTable">
+                            <thead>
+                                <tr>
+                                    <th>အချိန်</th>
+                                    <th>မေးခွန်း</th>
+                                    <th>အသုံးပြုသူ</th>
+                                    <th>အဖြေ</th>
+                                    <th>အခြေအနေ</th>
+                                    <th>လုပ်ဆောင်ချက်များ</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- Questions will be loaded here -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                
+                <!-- Users Section -->
+                <div id="users" class="admin-section">
+                    <h3><i class="fas fa-users"></i> အသုံးပြုသူများ</h3>
+                    <div class="table-container">
+                        <table id="usersTable">
+                            <thead>
+                                <tr>
+                                    <th>အမှတ်စဥ်</th>
+                                    <th>အမည်/ID</th>
+                                    <th>ပထမဆုံးအသုံးပြုချိန်</th>
+                                    <th>စုစုပေါင်းမေးခွန်းများ</th>
+                                    <th>လုပ်ဆောင်ချက်များ</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- Users will be loaded here -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                
+                <!-- Reports Section -->
+                <div id="reports" class="admin-section">
+                    <h3><i class="fas fa-chart-bar"></i> အစီရင်ခံစာများ</h3>
+                    <div class="dashboard-cards">
+                        <div class="dashboard-card">
+                            <div class="card-number" id="dailyQuestions">0</div>
+                            <div class="card-label">ယနေ့မေးခွန်းများ</div>
+                        </div>
+                        <div class="dashboard-card">
+                            <div class="card-number" id="weeklyQuestions">0</div>
+                            <div class="card-label">ယခုအပတ်မေးခွန်းများ</div>
+                        </div>
+                        <div class="dashboard-card">
+                            <div class="card-number" id="monthlyQuestions">0</div>
+                            <div class="card-label">ယခုလမေးခွန်းများ</div>
+                        </div>
+                        <div class="dashboard-card">
+                            <div class="card-number" id="popularCategory">DDC</div>
+                            <div class="card-label">အမေးများဆုံးအကြောင်းအရာ</div>
+                        </div>
+                    </div>
+                    
+                    <div style="background: white; padding: 20px; border-radius: 10px; margin-top: 30px; border: 1px solid #dcdde1;">
+                        <h4>အမျိုးအစားအလိုက် မေးခွန်းအရေအတွက်</h4>
+                        <div id="categoryChart" style="height: 300px; margin-top: 20px; padding: 20px; background: #f5f6fa; border-radius: 10px;">
+                            <p style="text-align: center; color: var(--primary);">DDC: ၁၈ မေးခွန်း</p>
+                            <p style="text-align: center; color: var(--primary);">မြန်မာစာပေ: ၁၂ မေးခွန်း</p>
+                            <p style="text-align: center; color: var(--primary);">ရာဇဝင်: ၉ မေးခွန်း</p>
+                            <p style="text-align: center; color: var(--primary);">စာအုပ်စာရင်း: ၇ မေးခွန်း</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Settings Section -->
+                <div id="settings" class="admin-section">
+                    <h3><i class="fas fa-cog"></i> စနစ်ချိန်ညှိချက်များ</h3>
+                    <div class="form-group">
+                        <label>စနစ်အမည်</label>
+                        <input type="text" id="systemName" value="မြန်မာပညာရပ် & DDC ရည်ညွှန်းလက်ထောက်">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>စီမံခန့်ခွဲသူ လျှို့ဝှက်နံပါတ်</label>
+                        <input type="password" id="adminPasswordSetting" placeholder="လျှို့ဝှက်နံပါတ် အသစ်">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>အလိုအလျောက်ဖြေနိုင်သော မေးခွန်းအဆင့်</label>
+                        <select id="autoAnswerLevel">
+                            <option value="high">မြင့် - အများစုကိုအလိုအလျောက်ဖြေရန်</option>
+                            <option value="medium" selected>အလယ်အလတ် - အခြေခံမေးခွန်းများကိုဖြေရန်</option>
+                            <option value="low">နိမ့် - လိုအပ်လျှင် လူကဖြေရန်</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>အီးမေးလ်အကြောင်းကြားခြင်း</label>
+                        <select id="emailNotifications">
+                            <option value="on" selected>ဖွင့်မည်</option>
+                            <option value="off">ပိတ်မည်</option>
+                        </select>
+                    </div>
+                    
+                    <button onclick="saveSettings()" style="background: var(--primary);">
+                        <i class="fas fa-save"></i> သိမ်းဆည်းမည်
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    // စာကြည့်တိုက်ပညာဌာနအတွက် ဒေတာဘေ့စ်
+    const LIBSCI_STORAGE_KEYS = {
+        REFERENCES: 'libsci_references',
+        QUESTIONS: 'libsci_questions',
+        USERS: 'libsci_users',
+        SETTINGS: 'libsci_settings',
+        STATS: 'libsci_stats'
+    };
+
+    // ပုံသေရည်ညွှန်းအချက်အလက်များ (မြန်မာပညာရပ် + DDC)
+    const DEFAULT_REFERENCES = [
+        {
+            id: 1,
+            category: 'DDC အခြေခံ',
+            title: 'DDC ဆိုတာဘာလဲ',
+            content: 'Dewey Decimal Classification (DDC) သည် စာကြည့်တိုက်များတွင် အသုံးပြုသော စာအုပ်စာတမ်းများကို အမျိုးအစားခွဲခြားသည့် စနစ်ဖြစ်သည်။ အမေရိကန် စာကြည့်တိုက်ပညာရှင် Melvil Dewey က ၁၈၇၆ ခုနှစ်တွင် စတင်တီထွင်ခဲ့သည်။ အဓိကအမျိုးအစား ၁၀ ခု (000-900) ပါဝင်ပြီး ဒဿမကိန်းများဖြင့် ခွဲခြားသည်။',
+            tags: ['DDC', 'ဒီဝေး', 'အမျိုးအစားခွဲခြား']
+        },
+        {
+            id: 2,
+            category: 'DDC ပုဒ်မခွဲ',
+            title: 'DDC ပုဒ်မခွဲ 800 (စာပေ)',
+            content: 'DDC 800 သည် စာပေဆိုင်ရာ အမျိုးအစားဖြစ်သည်။ 810 American literature, 820 English literature, 830 German literature, 840 French literature, 850 Italian, 860 Spanish, 870 Latin, 880 Classical Greek, 890 Other literatures. မြန်မာစာပေအတွက် 895.8 ကို အသုံးပြုသည်။',
+            tags: ['800', 'စာပေ', 'Literature']
+        },
+        {
+            id: 3,
+            category: 'DDC မြန်မာ',
+            title: 'DDC ပုဒ်မခွဲ 959.1 (မြန်မာ)',
+            content: 'DDC 959.1 သည် မြန်မာနိုင်ငံ၏ သမိုင်း၊ ပထဝီဝင်နှင့် ဆက်စပ်အကြောင်းအရာများအတွက် သတ်မှတ်ထားသော နံပါတ်ဖြစ်သည်။ 959.1 ကို မြန်မာ့ရာဇဝင်၊ ယဉ်ကျေးမှု၊ နိုင်ငံရေး စသည့်အကြောင်းအရာများအတွက် အသုံးပြုသည်။',
+            tags: ['959.1', 'မြန်မာ', 'Myanmar']
+        },
+        {
+            id: 4,
+            category: 'မြန်မာစာပေ',
+            title: 'မြန်မာစာပေသမိုင်း အကျဉ်း',
+            content: 'မြန်မာစာပေကို ပုဂံခေတ် (၁၁-၁၃ ရာစု)၊ အင်းဝခေတ် (၁၄-၁၆ ရာစု)၊ တောင်ငူခေတ် (၁၆-၁၈ ရာစု)၊ ကုန်းဘောင်ခေတ် (၁၈-၁၉ ရာစု)၊ ကိုလိုနီခေတ် (၁၉-၂၀ ရာစု) နှင့် ခေတ်ပေါ်စာပေဟူ၍ ပိုင်းခြားနိုင်သည်။ ထင်ရှားသော စာဆိုတော်များမှာ ရှင်မဟာရဋ္ဌသာရ၊ ရှင်မဟာသီလဝံသ၊ လက်ဝဲသုန္ဒရ၊ ဦးပုည၊ ဆရာကြီး ဇော်ဂျီ၊ မင်းသုဝဏ် စသည်တို့ဖြစ်သည်။',
+            tags: ['မြန်မာစာပေ', 'စာပေသမိုင်း', 'စာဆို']
+        },
+        {
+            id: 5,
+            category: 'စာအုပ်စာရင်းပြုစုခြင်း',
+            title: 'မြန်မာစာအုပ်စာရင်း ပြုစုနည်း (Cataloging)',
+            content: 'စာအုပ်စာရင်းပြုစုရာတွင် အဓိကအချက်များမှာ - ခေါင်းစဉ်၊ စာရေးဆရာအမည်၊ ထုတ်ဝေသည့်နှစ်၊ ထုတ်ဝေသူ၊ စာမျက်နှာအရေအတွက်၊ ISBN နံပါတ်၊ ခေါင်းစဉ်ခွဲများ (subject headings) နှင့် DDC နံပါတ်တို့ ဖြစ်သည်။ AACR2 နှင့် RDA စံနှုန်းများကို နိုင်ငံတကာတွင် အသုံးပြုသည်။ မြန်မာစာအုပ်များအတွက် မြန်မာစာအဖွဲ့၏ ခေါင်းစဉ်ခွဲများကို အသုံးပြုနိုင်သည်။',
+            tags: ['စာအုပ်စာရင်း', 'Cataloging', 'AACR2', 'RDA']
+        },
+        {
+            id: 6,
+            category: 'ကိုးကားချက်',
+            title: 'APA ကိုးကားစနစ်',
+            content: 'APA (American Psychological Association) စနစ်သည် လူမှုသိပ္ပံနယ်ပယ်တွင် အသုံးများသည်။\n\nစာအုပ်စာတမ်း: စာရေးဆရာအမည်. (ခုနှစ်). စာအုပ်အမည်. ထုတ်ဝေသူ.\n\nဂျာနယ်ဆောင်းပါး: စာရေးဆရာအမည်. (ခုနှစ်). ဆောင်းပါးခေါင်းစဉ်. ဂျာနယ်အမည်, အတွဲ(အမှတ်), စာမျက်နှာ.\n\nအွန်လိုင်းအရင်းအမြစ်: စာရေးဆရာအမည်. (ရက်စွဲ). ခေါင်းစဉ်. URL',
+            tags: ['APA', 'ကိုးကား']
+        },
+        {
+            id: 7,
+            category: 'မြန်မာရာဇဝင်',
+            title: 'မြန်မာရာဇဝင်ကျမ်းများ',
+            content: 'ထင်ရှားသော ရာဇဝင်ကျမ်းများမှာ - ဦးကုလား၏ မဟာရာဇဝင်ကြီး (၁၈၂၉)၊ တွင်းသင်းတိုက်ဝန် မဟာစည်သူ၏ ရာဇဝင်သစ်ကျမ်း (၁၈၃၀)၊ မှော်ဘီဆရာသိန်း၏ ကုန်းဘောင်ရာဇဝင်၊ ဒေါက်တာသန်းထွန်း၏ ခေတ်ဟောင်းမြန်မာရာဇဝင် စသည်တို့ဖြစ်သည်။',
+            tags: ['ရာဇဝင်', 'သမိုင်း', 'မဟာရာဇဝင်']
+        }
+    ];
+
+    // LocalStorage မှ အချက်အလက်များကို စီမံခြင်း
+    function initializeData() {
+        if (!localStorage.getItem(LIBSCI_STORAGE_KEYS.REFERENCES)) {
+            localStorage.setItem(LIBSCI_STORAGE_KEYS.REFERENCES, JSON.stringify(DEFAULT_REFERENCES));
+        }
+        if (!localStorage.getItem(LIBSCI_STORAGE_KEYS.QUESTIONS)) {
+            localStorage.setItem(LIBSCI_STORAGE_KEYS.QUESTIONS, JSON.stringify([]));
+        }
+        if (!localStorage.getItem(LIBSCI_STORAGE_KEYS.USERS)) {
+            localStorage.setItem(LIBSCI_STORAGE_KEYS.USERS, JSON.stringify([]));
+        }
+        if (!localStorage.getItem(LIBSCI_STORAGE_KEYS.SETTINGS)) {
+            const defaultSettings = {
+                systemName: "မြန်မာပညာရပ် & DDC ရည်ညွှန်းလက်ထောက်",
+                adminPassword: "libsci@2025",
+                autoAnswerLevel: "medium",
+                emailNotifications: "on"
+            };
+            localStorage.setItem(LIBSCI_STORAGE_KEYS.SETTINGS, JSON.stringify(defaultSettings));
+        }
+        if (!localStorage.getItem(LIBSCI_STORAGE_KEYS.STATS)) {
+            const defaultStats = {
+                totalQuestions: 0,
+                answeredQuestions: 0,
+                pendingQuestions: 0,
+                totalUsers: 0,
+                dailyQuestions: 0,
+                weeklyQuestions: 0,
+                monthlyQuestions: 0,
+                lastReset: new Date().toISOString()
+            };
+            localStorage.setItem(LIBSCI_STORAGE_KEYS.STATS, JSON.stringify(defaultStats));
+        }
+    }
+
+    function getData(key) {
+        const data = localStorage.getItem(key);
+        return data ? JSON.parse(data) : [];
+    }
+
+    function saveData(key, data) {
+        localStorage.setItem(key, JSON.stringify(data));
+    }
+
+    function getSettings() {
+        return JSON.parse(localStorage.getItem(LIBSCI_STORAGE_KEYS.SETTINGS));
+    }
+
+    function getStats() {
+        return JSON.parse(localStorage.getItem(LIBSCI_STORAGE_KEYS.STATS));
+    }
+
+    function updateStats(type) {
+        const stats = getStats();
+        const today = new Date().toDateString();
+        const lastReset = new Date(stats.lastReset).toDateString();
+        
+        if (today !== lastReset) {
+            stats.dailyQuestions = 0;
+            stats.lastReset = new Date().toISOString();
+        }
+        
+        switch(type) {
+            case 'question':
+                stats.totalQuestions++;
+                stats.dailyQuestions++;
+                stats.weeklyQuestions = Math.round(stats.dailyQuestions * 5);
+                stats.monthlyQuestions = Math.round(stats.dailyQuestions * 22);
+                break;
+            case 'answered':
+                stats.answeredQuestions++;
+                stats.pendingQuestions = Math.max(0, stats.pendingQuestions - 1);
+                break;
+            case 'user':
+                stats.totalUsers++;
+                break;
+        }
+        
+        saveData(LIBSCI_STORAGE_KEYS.STATS, stats);
+        return stats;
+    }
+
+    function recordQuestion(question, userId = null, status = 'pending') {
+        const questions = getData(LIBSCI_STORAGE_KEYS.QUESTIONS);
+        const newQuestion = {
+            id: Date.now(),
+            question: question,
+            userId: userId || generateUserId(),
+            timestamp: new Date().toLocaleString('my-MM'),
+            status: status,
+            answer: null,
+            category: categorizeQuestion(question)
+        };
+        
+        questions.unshift(newQuestion);
+        saveData(LIBSCI_STORAGE_KEYS.QUESTIONS, questions);
+        updateStats('question');
+        updateUserRecord(newQuestion.userId, question);
+        return newQuestion;
+    }
+
+    function generateUserId() {
+        return 'user_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
+    }
+
+    function updateUserRecord(userId, question) {
+        let users = getData(LIBSCI_STORAGE_KEYS.USERS);
+        let user = users.find(u => u.id === userId);
+        if (!user) {
+            user = {
+                id: userId,
+                firstSeen: new Date().toLocaleString('my-MM'),
+                lastSeen: new Date().toLocaleString('my-MM'),
+                questionCount: 1,
+                questions: [question]
+            };
+            users.push(user);
+            updateStats('user');
+        } else {
+            user.lastSeen = new Date().toLocaleString('my-MM');
+            user.questionCount++;
+            user.questions.push(question);
+        }
+        saveData(LIBSCI_STORAGE_KEYS.USERS, users);
+    }
+
+    function categorizeQuestion(question) {
+        const categories = {
+            'DDC': ['DDC', 'ဒီဝေး', 'ဒဿမ', 'အမျိုးအစားခွဲ', 'classification', 'dewey'],
+            'မြန်မာစာပေ': ['မြန်မာစာပေ', 'စာဆို', 'စာရေးဆရာ', 'စာပေသမိုင်း', 'စာတမ်း'],
+            'ရာဇဝင်': ['ရာဇဝင်', 'သမိုင်း', 'history', 'ပုဂံ', 'အင်းဝ', 'ကုန်းဘောင်'],
+            'စာအုပ်စာရင်း': ['စာအုပ်စာရင်း', 'catalog', 'AACR2', 'RDA', 'MARC'],
+            'ကိုးကားချက်': ['ကိုးကား', 'APA', 'MLA', 'Chicago', 'reference']
+        };
+        for (const [category, keywords] of Object.entries(categories)) {
+            for (const keyword of keywords) {
+                if (question.toLowerCase().includes(keyword.toLowerCase())) {
+                    return category;
+                }
+            }
+        }
+        return 'အခြား';
+    }
+
+    function autoAnswerQuestion(question) {
+        const refs = getData(LIBSCI_STORAGE_KEYS.REFERENCES);
+        const qLower = question.toLowerCase();
+        for (const ref of refs) {
+            if (qLower.includes(ref.title.toLowerCase()) ||
+                ref.tags.some(tag => qLower.includes(tag.toLowerCase()))) {
+                return `${ref.title} - ${ref.content}`;
+            }
+        }
+        // keyword fallback
+        for (const ref of refs) {
+            if (ref.content.toLowerCase().includes(qLower) || 
+                ref.title.toLowerCase().includes(qLower)) {
+                return ref.content;
+            }
+        }
+        return null;
+    }
+
+    // Admin functions
+    function showLogin() {
+        document.getElementById('loginOverlay').style.display = 'flex';
+    }
+
+    function loginAdmin() {
+        const password = document.getElementById('adminPassword').value;
+        const settings = getSettings();
+        const errorElement = document.getElementById('loginError');
+        if (password === settings.adminPassword) {
+            document.getElementById('loginOverlay').style.display = 'none';
+            document.getElementById('adminPassword').value = '';
+            errorElement.style.display = 'none';
+            showAdminPanel();
+        } else {
+            errorElement.style.display = 'block';
+        }
+    }
+
+    function showAdminPanel() {
+        loadDashboardData();
+        document.getElementById('adminOverlay').style.display = 'flex';
+    }
+
+    function loadDashboardData() {
+        const stats = getStats();
+        const questions = getData(LIBSCI_STORAGE_KEYS.QUESTIONS);
+        const users = getData(LIBSCI_STORAGE_KEYS.USERS);
+        const refs = getData(LIBSCI_STORAGE_KEYS.REFERENCES);
+        
+        document.getElementById('totalReferences').textContent = refs.length;
+        document.getElementById('totalQuestions').textContent = stats.totalQuestions;
+        document.getElementById('answeredQuestions').textContent = stats.answeredQuestions;
+        document.getElementById('totalUsers').textContent = stats.totalUsers;
+        document.getElementById('dailyQuestions').textContent = stats.dailyQuestions;
+        document.getElementById('weeklyQuestions').textContent = stats.weeklyQuestions;
+        document.getElementById('monthlyQuestions').textContent = stats.monthlyQuestions;
+
+        // Recent questions
+        const recentTable = document.querySelector('#recentQuestions tbody');
+        recentTable.innerHTML = questions.slice(0, 10).map(q => `
+            <tr>
+                <td>${q.timestamp}</td>
+                <td>${q.question.substring(0, 50)}${q.question.length > 50 ? '...' : ''}</td>
+                <td><span style="padding:3px 8px; border-radius:4px; background:${q.status==='answered'?'#d4edda':'#fff3cd'};">${q.status==='answered'?'ဖြေပြီး':'စောင့်ဆိုင်းနေ'}</span></td>
+                <td class="action-btns">
+                    <button class="action-btn view-btn" onclick="viewQuestion(${q.id})">ကြည့်ရန်</button>
+                    <button class="action-btn delete-btn" onclick="deleteQuestion(${q.id})">ဖျက်ရန်</button>
+                </td>
+            </tr>
+        `).join('');
+
+        // References table
+        const refTable = document.querySelector('#referencesTable tbody');
+        refTable.innerHTML = refs.map(r => `
+            <tr>
+                <td><strong>${r.title}</strong></td>
+                <td>${r.category}</td>
+                <td>${r.content.substring(0, 100)}${r.content.length > 100 ? '...' : ''}</td>
+                <td class="action-btns">
+                    <button class="action-btn edit-btn" onclick="editReference(${r.id})">ပြင်ဆင်ရန်</button>
+                    <button class="action-btn delete-btn" onclick="deleteReference(${r.id})">ဖျက်ရန်</button>
+                </td>
+            </tr>
+        `).join('');
+
+        // Questions table
+        const qTable = document.querySelector('#questionsTable tbody');
+        qTable.innerHTML = questions.map(q => `
+            <tr>
+                <td>${q.timestamp}</td>
+                <td>${q.question.substring(0,30)}${q.question.length>30?'...':''}</td>
+                <td>${q.userId.substring(0,8)}...</td>
+                <td>${q.answer ? 'ပေးပြီး' : 'မပေးရသေး'}</td>
+                <td><span style="background:${q.status==='answered'?'#d4edda':'#fff3cd'};">${q.status==='answered'?'ဖြေပြီး':'စောင့်ဆိုင်းနေ'}</span></td>
+                <td class="action-btns">
+                    <button class="action-btn edit-btn" onclick="answerQuestion(${q.id})">ဖြေရန်</button>
+                    <button class="action-btn delete-btn" onclick="deleteQuestion(${q.id})">ဖျက်ရန်</button>
+                </td>
+            </tr>
+        `).join('');
+
+        // Users table
+        const uTable = document.querySelector('#usersTable tbody');
+        uTable.innerHTML = users.slice(0,20).map((u, idx) => `
+            <tr>
+                <td>${idx+1}</td>
+                <td>${u.id.substring(0,15)}...</td>
+                <td>${u.firstSeen}</td>
+                <td>${u.questionCount}</td>
+                <td class="action-btns">
+                    <button class="action-btn view-btn" onclick="viewUser('${u.id}')">ကြည့်ရန်</button>
+                </td>
+            </tr>
+        `).join('');
+    }
+
+    function showAdminSection(sectionId) {
+        document.querySelectorAll('.admin-section').forEach(s => s.classList.remove('active'));
+        document.querySelectorAll('.admin-menu li').forEach(i => i.classList.remove('active'));
+        document.getElementById(sectionId).classList.add('active');
+        event.target.closest('li').classList.add('active');
+    }
+
+    function showAddReferenceForm() {
+        const title = prompt('ခေါင်းစဉ် ထည့်ပါ:');
+        if (!title) return;
+        const category = prompt('အမျိုးအစား ထည့်ပါ (DDC/မြန်မာစာပေ/ရာဇဝင်/စာအုပ်စာရင်း):');
+        if (!category) return;
+        const content = prompt('အကြောင်းအရာ ထည့်ပါ:');
+        if (!content) return;
+        const refs = getData(LIBSCI_STORAGE_KEYS.REFERENCES);
+        refs.push({ id: Date.now(), title, category, content, tags: [] });
+        saveData(LIBSCI_STORAGE_KEYS.REFERENCES, refs);
+        alert('ထည့်သွင်းပြီးပါပြီ!');
+        loadDashboardData();
+    }
+
+    function editReference(id) {
+        const refs = getData(LIBSCI_STORAGE_KEYS.REFERENCES);
+        const ref = refs.find(r => r.id === id);
+        if (!ref) return;
+        const newTitle = prompt('ခေါင်းစဉ်', ref.title);
+        if (newTitle === null) return;
+        const newCategory = prompt('အမျိုးအစား', ref.category);
+        if (newCategory === null) return;
+        const newContent = prompt('အကြောင်းအရာ', ref.content);
+        if (newContent === null) return;
+        ref.title = newTitle; ref.category = newCategory; ref.content = newContent;
+        saveData(LIBSCI_STORAGE_KEYS.REFERENCES, refs);
+        alert('ပြင်ဆင်ပြီးပါပြီ!');
+        loadDashboardData();
+    }
+
+    function deleteReference(id) {
+        if (!confirm('ဖျက်မှာသေချာပါသလား?')) return;
+        const refs = getData(LIBSCI_STORAGE_KEYS.REFERENCES).filter(r => r.id !== id);
+        saveData(LIBSCI_STORAGE_KEYS.REFERENCES, refs);
+        alert('ဖျက်ပြီးပါပြီ!');
+        loadDashboardData();
+    }
+
+    function answerQuestion(id) {
+        const questions = getData(LIBSCI_STORAGE_KEYS.QUESTIONS);
+        const q = questions.find(q => q.id === id);
+        if (!q) return;
+        const answer = prompt(`မေးခွန်း: ${q.question}\n\nအဖြေထည့်ပါ:`);
+        if (answer === null) return;
+        q.answer = answer;
+        q.status = 'answered';
+        saveData(LIBSCI_STORAGE_KEYS.QUESTIONS, questions);
+        updateStats('answered');
+        alert('ဖြေကြားပြီးပါပြီ!');
+        loadDashboardData();
+    }
+
+    function viewQuestion(id) {
+        const q = getData(LIBSCI_STORAGE_KEYS.QUESTIONS).find(q => q.id === id);
+        if (q) alert(`မေးခွန်း: ${q.question}\nအချိန်: ${q.timestamp}\nအဖြေ: ${q.answer || 'မရှိသေး'}`);
+    }
+
+    function deleteQuestion(id) {
+        if (!confirm('ဖျက်မှာသေချာပါသလား?')) return;
+        const filtered = getData(LIBSCI_STORAGE_KEYS.QUESTIONS).filter(q => q.id !== id);
+        saveData(LIBSCI_STORAGE_KEYS.QUESTIONS, filtered);
+        alert('ဖျက်ပြီးပါပြီ!');
+        loadDashboardData();
+    }
+
+    function viewUser(uid) {
+        const user = getData(LIBSCI_STORAGE_KEYS.USERS).find(u => u.id === uid);
+        if (user) alert(`ID: ${user.id}\nပထမဆုံး: ${user.firstSeen}\nမေးခွန်းအရေအတွက်: ${user.questionCount}`);
+    }
+
+    function saveSettings() {
+        const settings = getSettings();
+        settings.systemName = document.getElementById('systemName').value;
+        const newPwd = document.getElementById('adminPasswordSetting').value;
+        if (newPwd) settings.adminPassword = newPwd;
+        settings.autoAnswerLevel = document.getElementById('autoAnswerLevel').value;
+        settings.emailNotifications = document.getElementById('emailNotifications').value;
+        saveData(LIBSCI_STORAGE_KEYS.SETTINGS, settings);
+        alert('သိမ်းဆည်းပြီးပါပြီ!');
+    }
+
+    function exportData() {
+        const data = {
+            references: getData(LIBSCI_STORAGE_KEYS.REFERENCES),
+            questions: getData(LIBSCI_STORAGE_KEYS.QUESTIONS),
+            users: getData(LIBSCI_STORAGE_KEYS.USERS),
+            stats: getStats(),
+            settings: getSettings(),
+            exportDate: new Date().toLocaleString('my-MM')
+        };
+        const blob = new Blob([JSON.stringify(data, null, 2)], {type: 'application/json'});
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'libsci_export.json';
+        a.click();
+        alert('ဒေါင်းလုဒ်ဆွဲပြီးပါပြီ!');
+    }
+
+    function closeAdmin() {
+        document.getElementById('adminOverlay').style.display = 'none';
+    }
+
+    // Chat functions
+    function handleKeyPress(e) {
+        if (e.key === 'Enter') handleSearch();
+    }
+
+    function quickQuestion(q) {
+        document.getElementById('userInput').value = q;
+        handleSearch();
+    }
+
+    function handleSearch() {
+        const input = document.getElementById('userInput').value.trim();
+        if (!input) return;
+
+        addMessage(input, 'user');
+        document.getElementById('userInput').value = '';
+
+        const questionRecord = recordQuestion(input);
+        showTypingIndicator();
+
+        setTimeout(() => {
+            hideTypingIndicator();
+            const answer = autoAnswerQuestion(input);
+            if (answer) {
+                addMessage(answer, 'bot');
+                const questions = getData(LIBSCI_STORAGE_KEYS.QUESTIONS);
+                const q = questions.find(q => q.id === questionRecord.id);
+                if (q) { q.status = 'answered'; q.answer = answer; saveData(LIBSCI_STORAGE_KEYS.QUESTIONS, questions); updateStats('answered'); }
+            } else {
+                addMessage("ဤမေးခွန်းအတွက် အဖြေကို စီမံခန့်ခွဲသူများမှ ပြန်လည်ဖြေကြားပေးပါမည်။", 'bot');
+                const stats = getStats();
+                stats.pendingQuestions++;
+                saveData(LIBSCI_STORAGE_KEYS.STATS, stats);
+            }
+        }, 1000);
+    }
+
+    function showTypingIndicator() {
+        document.getElementById('typingIndicator').style.display = 'block';
+    }
+
+    function hideTypingIndicator() {
+        document.getElementById('typingIndicator').style.display = 'none';
+    }
+
+    function addMessage(text, sender) {
+        const chatBox = document.getElementById('chatBox');
+        const msgDiv = document.createElement('div');
+        msgDiv.className = `message ${sender}`;
+        msgDiv.innerHTML = text.replace(/\n/g, '<br>');
+        chatBox.appendChild(msgDiv);
+        chatBox.scrollTop = chatBox.scrollHeight;
+    }
+
+    // Initialize
+    document.addEventListener('DOMContentLoaded', function() {
+        initializeData();
+        console.log('📚 စာကြည့်တိုက်ပညာဌာန ရည်ညွှန်းစနစ် အဆင်သင့်ဖြစ်ပါပြီ။');
+        console.log('🔐 Admin Password: ' + getSettings().adminPassword);
+    });
+</script>
+</body>
+</html>
